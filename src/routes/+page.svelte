@@ -89,7 +89,7 @@
     <br />
     <small
         >Born out of Beardgel's disappointment •
-        <a href="https://github.com/surajgoraya/aot">Source code</a></small
+        <a href="https://github.com/surajgoraya/aot-tracker">Source code</a></small
     >
 </footer>
 
