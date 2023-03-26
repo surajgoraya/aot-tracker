@@ -5,6 +5,11 @@ export async function load({fetch}) {
         let aotProgress = await fetch('/api/progress');
         if (aotProgress.status === 200) {
             const aot_data: APIResult = await aotProgress.json();
+            if (aot_data.status !== 200){
+                return {
+                    error: true
+                }
+            } 
             return {
                 anime: aot_data.list_data,
                 watched_today: aot_data.watched_today

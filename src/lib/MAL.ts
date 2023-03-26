@@ -11,7 +11,13 @@ const instance = axios.create({
 
 
 const getAOTProgress = async () => {
-    let anime_list = await instance.get(`users/${USERNAME}/animelist`, { params: { limit: 200, fields: 'list_status', sort: 'list_updated_at' } });
+    let anime_list = undefined;
+
+    try {
+        anime_list = await instance.get(`users/${USERNAME}/animelist`, { params: { limit: 200, fields: 'list_status', sort: 'list_updated_at' } });
+    } catch (exception) {
+        return error(503, "MAL API is not available");
+    }
 
     if (anime_list.status !== 200) {
         return error(503, "MAL API is not available");
@@ -27,7 +33,7 @@ const getAOTProgress = async () => {
             watchedToday = true;
         }
 
-        return {watched_today: watchedToday, list_data: only_AOT};
+        return {status: 200, watched_today: watchedToday, list_data: only_AOT};
     }
 
 }
