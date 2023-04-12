@@ -5,6 +5,8 @@
     import Error from "../components/Error.svelte";
     import Loading from "../components/Loading.svelte";
     import { fade, slide } from "svelte/transition";
+    import Footer from "../components/common/Footer.svelte";
+    import Nav from "../components/common/Nav.svelte";
 
     export let data: APIResult;
 </script>
@@ -41,15 +43,7 @@
     </div>
 {/if}
 {#if !data.error}
-    <nav class="container">
-        <ul>
-            <li><strong>Interframe's AOT Tracker</strong></li>
-        </ul>
-        <ul>
-            <li><a href="/">Progress</a></li>
-            <li><a href="/api/progress">API</a></li>
-        </ul>
-    </nav>
+    <Nav/>
     <header class="container">
         <hgroup>
             <h1>Interframe's AOT Progress</h1>
@@ -84,14 +78,7 @@
         </div>
     </main>
 {/if}
-<footer class="container">
-    <hr />
-    <br />
-    <small
-        >Born out of Beardgel's disappointment •
-        <a href="https://github.com/surajgoraya/aot-tracker">Source code</a></small
-    >
-</footer>
+<Footer/>
 
 <style>
     main {
