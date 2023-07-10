@@ -1,5 +1,5 @@
 import type { AnimeListResult } from "./types/MALResults";
-
+import dayjs from "dayjs";
 import axios from "axios"
 import { MAL_CLIENT, USERNAME } from "$env/static/private";
 import { error } from "@sveltejs/kit";
@@ -28,12 +28,12 @@ const getAOTProgress = async () => {
     if (anime_data.data) {
         const only_AOT = anime_data.data.filter(anime => anime.node.title.includes("Shingeki no Kyojin"));
         const currently_watching = only_AOT.filter(anime => anime.list_status.status === 'watching');
+        const last_watched = dayjs(currently_watching[0].list_status.updated_at).toDate();
         let watchedToday = false;
-        if (isItToday(new Date(currently_watching[0].list_status.updated_at))){
-            watchedToday = true;
-        }
 
-        return {status: 200, watched_today: watchedToday, list_data: only_AOT};
+        if (isItToday(last_watched)) { watchedToday = true; }
+
+        return {status: 200, watched_today: watchedToday, last_watched: dayjs(last_watched).toISOString(), list_data: only_AOT};
     }
 
 }

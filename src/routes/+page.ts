@@ -12,7 +12,8 @@ export async function load({fetch}) {
             } 
             return {
                 anime: aot_data.list_data,
-                watched_today: aot_data.watched_today
+                watched_today: aot_data.watched_today,
+                last_watched: aot_data.last_watched
             };
         } else {
             return {
