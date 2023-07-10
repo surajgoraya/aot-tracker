@@ -7,6 +7,10 @@
     import { fade, slide } from "svelte/transition";
     import Footer from "../components/common/Footer.svelte";
     import Nav from "../components/common/Nav.svelte";
+    import dayjs from 'dayjs';
+    import relTime from 'dayjs/plugin/relativeTime';
+
+    dayjs.extend(relTime)
 
     export let data: APIResult;
 </script>
@@ -62,6 +66,9 @@
         <hgroup class="row">
             <h5>So, has Interframe Watched AOT Today?</h5>
             <p>{data.watched_today === false ? "Nope." : "YES!"}</p>
+            {#if data.watched_today === false}
+                <p>He last watched it on <b>{dayjs(data.last_watched).format('YYYY-MM-DD')}</b>, that's <b style="color: var(--primary);">{dayjs().to(data.last_watched)}</b>.</p>
+            {/if }
         </hgroup>
         <hr />
         <div class="grid" transition:slide|local>
