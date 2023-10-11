@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { ResultType } from "$lib/types/ResultType";
+    import type { APIResult, ResultType } from "$lib/types/ResultType";
     import type { AnimeResult } from "$lib/types/MALResults";
     import Anime from "../components/Anime.svelte";
     import Error from "../components/Error.svelte";
@@ -66,7 +66,7 @@
         <hgroup class="row">
             <h5>So, has Interframe Watched AOT Today?</h5>
             <p>{data.watched_today === false ? "Nope." : "YES!"}</p>
-            {#if data.watched_today === false}
+            {#if data.watched_today === false && data.last_watched != undefined}
                 <p>He last watched it on <b>{dayjs(data.last_watched).format('YYYY-MM-DD')}</b>, that's <b style="color: var(--primary);">{dayjs().to(data.last_watched)}</b>.</p>
             {/if }
         </hgroup>

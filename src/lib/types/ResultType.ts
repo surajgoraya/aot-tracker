@@ -4,8 +4,8 @@ interface APIResult {
     body?: string,
     error: undefined | boolean, 
     watched_today: boolean, 
-    last_watched: Date, 
-    list_data:  ArrayLike<AnimeResult> | AnimeResult[]
+    last_watched: Date | undefined, 
+    anime:  ArrayLike<AnimeResult> | AnimeResult[]
 }
 interface ResultType {
     error: undefined | boolean, 
